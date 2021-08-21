@@ -2,25 +2,31 @@ import React, { Component } from "react";
 // import { getMovies } from "../services/fakeMovieService";
 
 class Counter extends Component {
-  state = {
-    count: this.props.value,
-    imageUlr: "https://picsum.photos/200",
-    tags: ["tag1", "tag2", "tag3"],
-  };
+  // state = {
+  //   count: this.props.val.value,
+  //   imageUlr: "https://picsum.photos/200",
+  //   tags: ["tag1", "tag2", "tag3"],
+  // };
 
-  handleIncrement = () => {
-    this.setState({ count: this.state.count + 1 });
-  };
+  // handleIncrement = () => {
+  //   this.setState({ count: this.state.count + 1 });
+  // };
 
   render() {
     return (
       <div>
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
         <button
-          onClick={this.handleIncrement}
-          className="btn btn-secondary btn-sm"
+          onClick={() => this.props.onIncrement(this.props.val)}
+          className="btn btn-outline-secondary btn-sm"
         >
           Click me
+        </button>
+        <button
+          onClick={() => this.props.onDelete(this.props.val.id)}
+          className="btn btn-outline-danger btn-sm m-2"
+        >
+          Delete
         </button>
         {/* <ul>
           {this.state.tags.map((tag) => (
@@ -33,13 +39,13 @@ class Counter extends Component {
 
   getBadgeClasses() {
     let dynamicClsses = "badge m-2 badge-";
-    dynamicClsses += this.state.count === 0 ? "warning" : "primary";
+    dynamicClsses += this.props.val.value === 0 ? "warning" : "primary";
     return dynamicClsses;
   }
 
   formatCount() {
-    const { count } = this.state;
-    return count === 0 ? "Zero" : count;
+    const { value } = this.props.val;
+    return value === 0 ? "Zero" : value;
   }
 }
 
